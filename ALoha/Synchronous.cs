@@ -96,7 +96,9 @@ namespace ALoha {
         }
         #endregion
 
-        public Synchronous() : this(1, 5, 2, 10) {
+        public Synchronous() 
+            : this(1, 5, 2, 10) {
+
         }
 
         public Synchronous(int n, int r, double g, int l) {
@@ -104,6 +106,11 @@ namespace ALoha {
             this.r = r;
             this.g = g;
             this.l = l;
+        }
+
+        public Synchronous(IAloha aloha) 
+            : this(aloha.N, aloha.R, aloha.G, aloha.L) { 
+        
         }
 
         public State[] State() {

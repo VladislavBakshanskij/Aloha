@@ -92,7 +92,8 @@ namespace ALoha {
         }
         #endregion
 
-        public Asynchronous() : this(1, 5, 2, 10) {
+        public Asynchronous() 
+            : this(1, 5, 2, 10) {
         }
 
         public Asynchronous(int n, int r, double g, int l) {
@@ -100,6 +101,11 @@ namespace ALoha {
             this.r = r;
             this.g = g;
             this.l = l;
+        }
+
+        public Asynchronous(IAloha aloha) 
+            : this(aloha.N, aloha.R, aloha.G, aloha.L) {
+
         }
 
         public State[] State() {

@@ -9,17 +9,19 @@
     <Grid>
         <Button Name="Go" Content="Go" HorizontalAlignment="Left" VerticalAlignment="Top" Width="227" Margin="10,188,0,0" Height="53" Click="Go_Click" />
         <GroupBox Header="Входные данные" HorizontalAlignment="Left" Height="173" VerticalAlignment="Top" Width="484" Margin="10,10,0,0" />
-        <Label Name="Label1" Content="Временной интервал" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,60,0,0" />
-        <Label Name="Label2" Content="Нормированная пропускная нагрузка&#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,32,0,0" />
-        <Label Name="Label3" Content="Количество пакетов" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,91,0,0" />
-        <TextBox Name="rg" HorizontalAlignment="Left" Height="23" Margin="249,32,0,0" TextWrapping="Wrap" Text="2" VerticalAlignment="Top" Width="230"/>
-        <TextBox Name="r" HorizontalAlignment="Left" Height="23" Margin="249,60,0,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="230"/>
-        <TextBox Name="l" HorizontalAlignment="Left" Height="23" Margin="249,88,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="230"/>
-        <ListBox HorizontalAlignment="Left" Height="237" VerticalAlignment="Top" Width="484" Margin="10,246,0,0"/>
-        <Label Content="Количество процессоров" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,117,0,0"/>
-        <Label Content="Пропускная нагрузка" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,148,0,0"/>
-        <TextBox Name="n" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="230" Margin="249,120,0,0"/>
-        <TextBox Name="g" HorizontalAlignment="Left" Height="21" Margin="249,152,0,0" TextWrapping="Wrap" Text="0.25" VerticalAlignment="Top" Width="230"/>
-        <Button Content="Об авторе" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Margin="249,188,0,0" Height="53" Click="Button_Click"/>
+        <Label Name="Label1" Content="Временной интервал" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="127,59,0,0" />
+        <Label Name="Label2" Content="Нормированная пропускная нагрузка&#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="127,31,0,0" />
+        <Label Name="Label3" Content="Количество пакетов" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="127,90,0,0" />
+        <TextBox KeyDown="rg_KeyDown" Name="rg" HorizontalAlignment="Left" Height="23" Margin="348,31,0,0" TextWrapping="Wrap" Text="2" VerticalAlignment="Top" Width="128" />
+        <TextBox KeyDown="r_KeyDown" Name="r" HorizontalAlignment="Left" Height="23" Margin="348,59,0,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="128" />
+        <TextBox KeyDown="l_KeyDown" Name="l" HorizontalAlignment="Left" Height="23" Margin="348,87,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="128" />
+        <TextBox KeyDown="n_KeyDown" Name="n" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="128" Margin="348,119,0,0" />
+        <TextBox KeyDown="g_KeyDown" Name="g" HorizontalAlignment="Left" Height="21" Margin="348,151,0,0" TextWrapping="Wrap" Text="0.25" VerticalAlignment="Top" Width="128" />
+        <ListBox Name="listbox" HorizontalAlignment="Left" Height="237" VerticalAlignment="Top" Width="484" Margin="10,246,0,0" />
+        <Label Content="Количество процессоров" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="127,116,0,0" />
+        <Label Content="Пропускная нагрузка" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="127,147,0,0" />
+        <Button Content="Об авторе" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Margin="249,188,0,0" Height="53" Click="Button_Click" />
+        <CheckBox Name="Async" Content="Асинхронная" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="27,37,0,0" />
+        <CheckBox Name="Sync" Content="Синхронная" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="27,65,0,0" />
     </Grid>
 </Window>

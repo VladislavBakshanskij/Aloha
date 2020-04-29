@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace ALoha {
-    interface IAloha {
+    public interface IAloha {
         double RG { get; }
         int R { get; set; }
         int L { get; set; }
