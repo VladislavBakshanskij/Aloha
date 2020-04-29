@@ -65,7 +65,6 @@
       <DependentUpon>AboutAs.cs</DependentUpon>
     </Compile>
     <Compile Include="Asynchronous.cs" />
-    <Compile Include="Extension.cs" />
     <Compile Include="Information.cs" />
     <Compile Include="Number.cs" />
     <Compile Include="State.cs" />
