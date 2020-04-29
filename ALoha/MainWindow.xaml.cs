@@ -13,15 +13,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Drawing;
 
 namespace ALoha {
     public partial class MainWindow : Window {
-        private Brush defautlBrush;
+        private System.Windows.Media.Brush defautlBrush;
 
         public MainWindow() {
             InitializeComponent();
             this.ResizeMode = ResizeMode.NoResize;
             defautlBrush = this.r.Foreground;
+            System.Drawing.Icon icon = Properties.Resources.alohaIcon;
+            Bitmap bitmap = icon.ToBitmap();
+            Icon = bitmap.ToImageSource();
         }
 
         private State[] Aloha(IAloha aloha) {

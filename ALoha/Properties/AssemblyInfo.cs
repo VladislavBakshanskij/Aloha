@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Бакшанский Владислав")]
 [assembly: AssemblyProduct("ALoha")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCopyright("2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
