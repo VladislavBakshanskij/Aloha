@@ -16,9 +16,12 @@ using System.Windows.Navigation;
 
 namespace ALoha {
     public partial class MainWindow : Window {
+        private Brush defautlBrush;
+
         public MainWindow() {
             InitializeComponent();
             this.ResizeMode = ResizeMode.NoResize;
+            defautlBrush = this.r.Foreground;
         }
 
         private State[] Aloha(IAloha aloha) {
@@ -30,19 +33,75 @@ namespace ALoha {
                 this.listbox.Items.Clear();
                 Dictionary<Number, State[]> states = new Dictionary<Number, State[]>();
                 ValidException validException = new ValidException();
+                SolidColorBrush red = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 0, 0));
 
-                this.r.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 0, 0));
+                r.Text = r.Text.Replace(" ", string.Empty).Replace(".", ",");
+                rg.Text = rg.Text.Replace(" ", string.Empty).Replace(".", ",");
+                g.Text = g.Text.Replace(" ", string.Empty).Replace(".", ",");
+                l.Text = l.Text.Replace(" ", string.Empty).Replace(".", ",");
+                n.Text = n.Text.Replace(" ", string.Empty).Replace(".", ",");
+
+                if (r.Text == string.Empty || 
+                    r.Text.Count(symbol => symbol == '.') > 1 ||
+                    r.Text.Count(symbol => symbol == ',') > 1
+                ) {
+                    this.r.Foreground = red;
+                    validException.IsValid = false;
+                } 
+                
+                if (rg.Text == string.Empty || 
+                    rg.Text.Count(symbol => symbol == '.') > 1 ||
+                    rg.Text.Count(symbol => symbol == ',') > 1
+                ) {
+                    this.rg.Foreground = red;
+                    validException.IsValid = false;
+                } 
+                
+                if (n.Text == string.Empty || 
+                    n.Text.Count(symbol => symbol == '.') > 1 || 
+                    n.Text.Count(symbol => symbol == ',') > 1
+                ) {
+                    this.n.Foreground = red;
+                    validException.IsValid = false;
+                } 
+                
+                if (l.Text == string.Empty || 
+                    l.Text.Count(symbol => symbol == '.') > 1 ||
+                    l.Text.Count(symbol => symbol == ',') > 1
+                ) {
+                    this.l.Foreground = red;
+                    validException.IsValid = false;
+                } 
+                
+                if (g.Text == string.Empty ||
+                    g.Text.Count(symbol => symbol == '.') > 1 || 
+                    g.Text.Count(symbol => symbol == ',') > 1
+                ) {
+                    this.g.Foreground = red;
+                    validException.IsValid = false;
+                }
 
                 if (!validException.IsValid) {
-                    return;
                     throw validException;
                 }
 
                 if (Sync.IsChecked == true || Async.IsChecked == true) {
                     if (Async.IsChecked == true) {
-                        states.Add(Number.Async, Aloha(new Asynchronous()));
+                        states.Add(Number.Async, Aloha(new Asynchronous(
+                            int.Parse(n.Text),
+                            int.Parse(r.Text),
+                            double.Parse(g.Text),
+                            int.Parse(l.Text), 
+                            double.Parse(rg.Text)
+                        )));
                     } if (Sync.IsChecked == true) {
-                        states.Add(Number.Sync, Aloha(new Synchronous()));
+                        states.Add(Number.Sync, Aloha(new Synchronous(
+                            int.Parse(n.Text),
+                            int.Parse(r.Text),
+                            double.Parse(g.Text),
+                            int.Parse(l.Text),
+                            double.Parse(rg.Text)
+                        )));
                     }
                 } else {
                     throw new Exception("Выбирите хотя бы один метод Алоха!");
@@ -62,7 +121,7 @@ namespace ALoha {
                         this.listbox.Items.Add(state.ToString());
                     }
 
-                    this.listbox.Items.Add("/************************/");
+                    this.listbox.Items.Add("/*********************************************/");
                 }
 
                 this.listbox.Items.RemoveAt(listbox.Items.Count - 1);
@@ -87,7 +146,10 @@ namespace ALoha {
 
             if (!isD && !isNumpad && !isDelete && !isBackSpace && !isSeparator) {
                 e.Handled = true;
+                return;
             }
+
+            rg.Foreground = defautlBrush;
         }
 
         private void r_KeyDown(object sender, KeyEventArgs e) {
@@ -98,7 +160,10 @@ namespace ALoha {
 
             if (!isD && !isNumpad && !isDelete && !isBackSpace) {
                 e.Handled = true;
+                return;
             }
+
+            r.Foreground = defautlBrush;
         }
 
         private void l_KeyDown(object sender, KeyEventArgs e) {
@@ -111,6 +176,8 @@ namespace ALoha {
                 e.Handled = true;
                 return;
             }
+
+            l.Foreground = defautlBrush;
         }
 
         private void n_KeyDown(object sender, KeyEventArgs e) {
@@ -123,6 +190,8 @@ namespace ALoha {
                 e.Handled = true;
                 return;
             }
+
+            n.Foreground = defautlBrush;
         }
 
         private void g_KeyDown(object sender, KeyEventArgs e) {
@@ -137,6 +206,8 @@ namespace ALoha {
                 e.Handled = true;
                 return;
             }
+
+            n.Foreground = defautlBrush;
         }
     }
 }

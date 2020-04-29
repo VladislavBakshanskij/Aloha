@@ -97,11 +97,11 @@ namespace ALoha {
         #endregion
 
         public Synchronous() 
-            : this(1, 5, 2, 10) {
+            : this(1, 5, 2, 10, 2.0) {
 
         }
 
-        public Synchronous(int n, int r, double g, int l) {
+        public Synchronous(int n, int r, double g, int l, double rg) {
             this.n = n;
             this.r = r;
             this.g = g;
@@ -109,7 +109,7 @@ namespace ALoha {
         }
 
         public Synchronous(IAloha aloha) 
-            : this(aloha.N, aloha.R, aloha.G, aloha.L) { 
+            : this(aloha.N, aloha.R, aloha.G, aloha.L, aloha.RG) { 
         
         }
 
@@ -136,12 +136,12 @@ namespace ALoha {
                 }
             }
 
-            rg = (j + i) * n * l / r / l;
+            double exRG = (j + i) * n * l / r / l;
 
             return new State[] {
                 new State("Количество успешно пройденных пакетов", j.ToString()),
                 new State("Количество непрошедших пакетов", i.ToString()),
-                new State("Опытное значение нормированной пропускнной нагрузки (RG)", RG.ToString()),
+                new State("Опытное значение нормированной пропускнной нагрузки (RG)", exRG.ToString()),
                 new State("Опытное значение производительности (S)", (RG * Math.Exp(-2 * RG)).ToString()),
                 new State("Общее время передачи кадров", ((j + i) * r).ToString()),
                 new State("Время передачи одного кадра", ((j + i) * r / l).ToString()),
