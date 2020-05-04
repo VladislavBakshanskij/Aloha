@@ -10,8 +10,8 @@ namespace Aloha.Helpers {
             get {
                 object[] attributes = Assembly.GetExecutingAssembly()
                                                 .GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-                if (attributes.Length == 0)
-                    return "";
+                if (attributes?.Length == 0)
+                    return string.Empty;
                 else
                     return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
             }
@@ -27,8 +27,8 @@ namespace Aloha.Helpers {
             get {
                 object[] attributes = Assembly.GetExecutingAssembly()
                                                 .GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
-                if (attributes.Length == 0)
-                    return "";
+                if (attributes?.Length == 0)
+                    return string.Empty;
                 else
                     return ((AssemblyDescriptionAttribute)attributes[0]).Description;
             }
@@ -38,8 +38,8 @@ namespace Aloha.Helpers {
             get {
                 object[] attributes = Assembly.GetExecutingAssembly()
                                                 .GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
-                if (attributes.Length == 0)
-                    return "";
+                if (attributes?.Length == 0)
+                    return string.Empty;
                 else 
                     return ((AssemblyProductAttribute)attributes[0]).Product;
             }
@@ -49,8 +49,8 @@ namespace Aloha.Helpers {
             get {
                 object[] attributes = Assembly.GetExecutingAssembly()
                                                 .GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
-                if (attributes.Length == 0)
-                    return "";
+                if (attributes?.Length == 0)
+                    return string.Empty;
                 else 
                     return ((AssemblyCompanyAttribute)attributes[0]).Company;
             }

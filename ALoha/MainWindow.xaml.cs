@@ -144,8 +144,8 @@ namespace Aloha {
 
                     this.listbox.Items.Add("/*******************************************************************/");
                 }
-                Report.IsEnabled = states.Count == 2;
 
+                Report.IsEnabled = states.Count == 2;
                 this.listbox.Items.RemoveAt(listbox.Items.Count - 1);
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message);
@@ -236,6 +236,7 @@ namespace Aloha {
 
         private void Report_Click(object sender, RoutedEventArgs e) {
             using (ReportForm report = new ReportForm()) {
+                ReportForm.States = states;
                 report.ShowDialog();
             }
         }

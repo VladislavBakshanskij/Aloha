@@ -108,6 +108,7 @@ namespace Aloha {
             this.r = r;
             this.g = g;
             this.l = l;
+            this.rg = rg;
         }
 
         public Synchronous(IAloha aloha) 
@@ -139,13 +140,13 @@ namespace Aloha {
                     }
                 }
 
-                double exRG = (j + i) * n * l / r / l;
+                double exRG = (j + i) * n * l / r / (double)l;
 
                 return new State[] {
                     new State("Количество успешно пройденных пакетов", j.ToString()),
-                    new State("Количество непрошедших пакетов", i.ToString()),
+                    new State("Количество коллизий", i.ToString()),
                     new State("Опытное значение нормированной пропускнной нагрузки (RG)", exRG.ToString()),
-                    new State("Опытное значение производительности (S)", (RG * Math.Exp(-2 * RG)).ToString()),
+                    new State("Опытное значение производительности (S)", (exRG * Math.Exp(-2 * exRG)).ToString()),
                     new State("Общее время передачи кадров", ((j + i) * r).ToString()),
                     new State("Время передачи одного кадра", ((j + i) * r / l).ToString()),
                 };

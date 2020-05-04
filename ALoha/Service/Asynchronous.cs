@@ -15,7 +15,7 @@ namespace Aloha.Service {
 
         #region Properties
         /// <summary>
-        /// Опытное значение нормированной пропускнной нагрузки 
+        /// Нормированная пропускная нагрузка 
         /// </summary>
         public double RG {
             get {
@@ -82,7 +82,7 @@ namespace Aloha.Service {
         }
 
         /// <summary>
-        /// Вероятность прохождения кадра Exp(-2 * G)
+        /// Вероятность прохождения кадра Exp(-G)
         /// </summary>
         public double P {
             get {
@@ -141,7 +141,7 @@ namespace Aloha.Service {
                     new State("Количество успешно пройденных пакетов", j.ToString()),
                     new State("Количество коллизий", i.ToString()),
                     new State("Опытное значение нормированной пропускнной нагрузки (RG)", exRG.ToString()),
-                    new State("Опытное значение производительности (S)", (RG * Math.Exp(-2 * RG)).ToString()),
+                    new State("Опытное значение производительности (S)", (exRG * Math.Exp(-2 * exRG)).ToString()),
                     new State("Общее время передачи кадров", ((j + i) * r).ToString()),
                     new State("Время передачи одного кадра", ((j + i) * r / l).ToString()),
                 };

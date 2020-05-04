@@ -6,7 +6,7 @@ using System.Text;
 using System.Windows.Markup;
 
 namespace Aloha.Helpers {
-    public struct State {
+    public class State {
         private string name;
         private string value;
 
@@ -41,8 +41,28 @@ namespace Aloha.Helpers {
             this.value = value;
         }
 
+        public static bool operator >(State a, State b) {
+            return a.Value.CompareTo(b.Value) == 1;
+        }
+
+        public static bool operator <(State a, State b) {
+            return a.Value.CompareTo(b.Value) == -1;
+        }
+
+        public static bool operator ==(State a, State b) {
+            return a.Value.Equals(b.Value);
+        }
+
+        public static bool operator !=(State a, State b) {
+            return a.Value.Equals(b.Value);
+        }
+
         public override string ToString() {
             return name + ": " + value;
+        }
+
+        public override bool Equals(object obj) {
+            return value.Equals(obj);
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Aloha"
         mc:Ignorable="d"
-        Title="Курсовая работа" Height="524" Width="512">
+        Title="Курсовая работа" Height="612.5" Width="512">
     <Grid>
         <Button Name="Go" Content="Go" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="10,188,0,0" Height="53" Click="Go_Click" />
         <GroupBox Header="Входные данные" HorizontalAlignment="Left" Height="173" VerticalAlignment="Top" Width="484" Margin="10,10,0,0" />
@@ -17,7 +17,7 @@
         <TextBox KeyDown="l_KeyDown" Name="l" HorizontalAlignment="Left" Height="23" Margin="348,87,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="128" />
         <TextBox KeyDown="n_KeyDown" Name="n" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="128" Margin="348,119,0,0" />
         <TextBox KeyDown="g_KeyDown" Name="g" HorizontalAlignment="Left" Height="21" Margin="348,151,0,0" TextWrapping="Wrap" Text="0.25" VerticalAlignment="Top" Width="128" />
-        <ListBox Name="listbox" HorizontalAlignment="Left" Height="237" VerticalAlignment="Top" Width="484" Margin="10,246,0,0" />
+        <ListBox Name="listbox" HorizontalAlignment="Left" Height="325" VerticalAlignment="Top" Width="484" Margin="10,246,0,0" />
         <Label Content="Количество процессоров" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="127,116,0,0" />
         <Label Content="Пропускная нагрузка" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="127,147,0,0" />
         <Button Content="Об авторе" HorizontalAlignment="Left" VerticalAlignment="Top" Width="157" Margin="189,188,0,0" Height="53" Click="Button_Click" />

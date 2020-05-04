@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Aloha.Helpers {
     public enum Type {
-        Async, Sync
+        Async = 0, 
+        Sync = 1
     }
 }
