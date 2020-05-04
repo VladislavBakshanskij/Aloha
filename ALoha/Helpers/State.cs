@@ -42,19 +42,27 @@ namespace Aloha.Helpers {
         }
 
         public static bool operator >(State a, State b) {
-            return a.Value.CompareTo(b.Value) == 1;
+            double aValue = Convert.ToDouble(a.value);
+            double bValue = Convert.ToDouble(b.value);
+            return aValue > bValue;
         }
 
         public static bool operator <(State a, State b) {
-            return a.Value.CompareTo(b.Value) == -1;
+            double aValue = Convert.ToDouble(a.value);
+            double bValue = Convert.ToDouble(b.value);
+            return aValue > bValue;
         }
 
         public static bool operator ==(State a, State b) {
-            return a.Value.Equals(b.Value);
+            double aValue = Convert.ToDouble(a.value);
+            double bValue = Convert.ToDouble(b.value);
+            return aValue == bValue;
         }
 
         public static bool operator !=(State a, State b) {
-            return a.Value.Equals(b.Value);
+            double aValue = Convert.ToDouble(a.value);
+            double bValue = Convert.ToDouble(b.value);
+            return aValue == bValue;
         }
 
         public override string ToString() {

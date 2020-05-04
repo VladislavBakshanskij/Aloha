@@ -55,7 +55,6 @@ namespace Aloha {
                 states = states ?? new Dictionary<Helpers.Type, State[]>();
 
                 r.Text = r.Text.Replace(" ", string.Empty).Replace(".", ",");
-                rg.Text = rg.Text.Replace(" ", string.Empty).Replace(".", ",");
                 g.Text = g.Text.Replace(" ", string.Empty).Replace(".", ",");
                 l.Text = l.Text.Replace(" ", string.Empty).Replace(".", ",");
                 n.Text = n.Text.Replace(" ", string.Empty).Replace(".", ",");
@@ -66,14 +65,6 @@ namespace Aloha {
                     r.Text.Count(symbol => symbol == ',') > 1
                 ) {
                     this.r.Foreground = red;
-                    validException.IsValid = false;
-                } 
-                
-                if (rg.Text == string.Empty || 
-                    rg.Text.Count(symbol => symbol == '.') > 1 ||
-                    rg.Text.Count(symbol => symbol == ',') > 1
-                ) {
-                    this.rg.Foreground = red;
                     validException.IsValid = false;
                 } 
                 
@@ -112,16 +103,14 @@ namespace Aloha {
                             int.Parse(n.Text),
                             int.Parse(r.Text),
                             double.Parse(g.Text),
-                            int.Parse(l.Text), 
-                            double.Parse(rg.Text)
+                            int.Parse(l.Text)
                         )));
                     } if (isSync) {
                         states.Add(Helpers.Type.Sync, AlohaState(new Synchronous(
                             int.Parse(n.Text),
                             int.Parse(r.Text),
                             double.Parse(g.Text),
-                            int.Parse(l.Text),
-                            double.Parse(rg.Text)
+                            int.Parse(l.Text)
                         )));
                     }
                 } else {
@@ -159,22 +148,6 @@ namespace Aloha {
         }
 
         #region TextBoxs
-        private void rg_KeyDown(object sender, KeyEventArgs e) {
-            bool isD = e.Key >= Key.D0 && e.Key <= Key.D1;
-            bool isNumpad = e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9;
-            bool isBackSpace = e.Key == Key.Back;
-            bool isDelete = e.Key == Key.Delete;
-            bool isSeparator = e.Key == Key.OemComma || e.Key == Key.Decimal || 
-                                    e.Key == Key.OemQuestion || e.Key == Key.OemPeriod;
-
-            if (!isD && !isNumpad && !isDelete && !isBackSpace && !isSeparator) {
-                e.Handled = true;
-                return;
-            }
-
-            rg.Foreground = defautlBrush;
-        }
-
         private void r_KeyDown(object sender, KeyEventArgs e) {
             bool isD = e.Key >= Key.D0 && e.Key <= Key.D1;
             bool isNumpad = e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9;

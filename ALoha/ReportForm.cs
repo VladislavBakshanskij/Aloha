@@ -44,10 +44,16 @@ namespace Aloha {
 
             List<State> diff = new List<State> {
                 new State(
-                    $"Число коллизий у {AsyncOrSyncDesc(states[Helpers.Type.Async][id], states[Helpers.Type.Sync][id])}",
-                    states[Helpers.Type.Async][id] < states[Helpers.Type.Sync][id] ? states[Helpers.Type.Async][id].Value : states[Helpers.Type.Sync][id].Value
+                    $"Теоритическая производительность больше у {AsyncOrSyncAsc(states[Helpers.Type.Async][id], states[Helpers.Type.Sync][id])}",
+                    states[Helpers.Type.Async][id] > states[Helpers.Type.Sync][id] ? states[Helpers.Type.Async][id].Value : states[Helpers.Type.Sync][id].Value
                 )
             };
+            id++;
+
+            diff.Add(new State(
+                $"Число коллизий меньше у {AsyncOrSyncAsc(states[Helpers.Type.Async][id], states[Helpers.Type.Sync][id])}",
+                states[Helpers.Type.Async][id] > states[Helpers.Type.Sync][id] ? states[Helpers.Type.Sync][id].Value : states[Helpers.Type.Async][id].Value
+            ));
             id++;
 
             diff.Add(new State(

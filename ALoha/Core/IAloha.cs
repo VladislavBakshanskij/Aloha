@@ -6,7 +6,6 @@ using System.Text;
 
 namespace Aloha.Core {
     public interface IAloha {
-        double RG { get; }
         int R { get; set; }
         int L { get; set; }
         int N { get; set; }

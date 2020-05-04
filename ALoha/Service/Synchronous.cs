@@ -15,17 +15,8 @@ namespace Aloha {
         private int r;
         private double g;
         private int l;
-        private double rg;
 
         #region Properties
-        /// <summary>
-        /// Опытное значение нормированной пропускнной нагрузки 
-        /// </summary>
-        public double RG {
-            get {
-                return rg;
-            }
-        }
 
         /// <summary>
         /// Временной интервал
@@ -86,12 +77,12 @@ namespace Aloha {
         }
 
         /// <summary>
-        /// Вероятность прохождения кадра Exp(-2 * G)
+        /// Вероятность прохождения кадра Exp(-G)
         /// </summary>
         public double P {
             get {
                 if (g != double.NaN)
-                    return Math.Exp(-2 * G);
+                    return Math.Exp(-G);
                 else
                     throw new Exception("Пропускная нагрузка не задана!");
             }
@@ -99,20 +90,19 @@ namespace Aloha {
         #endregion
 
         public Synchronous() 
-            : this(1, 5, 2, 10, 2.0) {
+            : this(1, 5, 2, 10) {
 
         }
 
-        public Synchronous(int n, int r, double g, int l, double rg) {
+        public Synchronous(int n, int r, double g, int l) {
             this.n = n;
             this.r = r;
             this.g = g;
             this.l = l;
-            this.rg = rg;
         }
 
         public Synchronous(IAloha aloha) 
-            : this(aloha.N, aloha.R, aloha.G, aloha.L, aloha.RG) { 
+            : this(aloha.N, aloha.R, aloha.G, aloha.L) { 
         
         }
 
@@ -140,13 +130,14 @@ namespace Aloha {
                     }
                 }
 
-                double exRG = (j + i) * n * l / r / (double)l;
+                dynamic rg = (j + i) * n * l / r / l;
 
                 return new State[] {
                     new State("Количество успешно пройденных пакетов", j.ToString()),
+                    new State("Теоритическое значений производительности", (P * G).ToString()),
                     new State("Количество коллизий", i.ToString()),
-                    new State("Опытное значение нормированной пропускнной нагрузки (RG)", exRG.ToString()),
-                    new State("Опытное значение производительности (S)", (exRG * Math.Exp(-2 * exRG)).ToString()),
+                    new State("Опытное значение нормированной пропускнной нагрузки (RG)", rg.ToString()),
+                    new State("Опытное значение производительности (S)", (rg * Math.Exp(-rg)).ToString()),
                     new State("Общее время передачи кадров", ((j + i) * r).ToString()),
                     new State("Время передачи одного кадра", ((j + i) * r / l).ToString()),
                 };
