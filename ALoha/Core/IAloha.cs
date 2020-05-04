@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Aloha.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ALoha {
+namespace Aloha.Core {
     public interface IAloha {
         double RG { get; }
         int R { get; set; }

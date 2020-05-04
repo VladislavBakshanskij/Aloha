@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace ALoha {
+namespace Aloha.Helpers {
     public static class Inforamtion {
         public static string Copyright {
             get {

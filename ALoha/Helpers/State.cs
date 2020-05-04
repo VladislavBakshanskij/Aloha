@@ -5,7 +5,7 @@ using System.Security;
 using System.Text;
 using System.Windows.Markup;
 
-namespace ALoha {
+namespace Aloha.Helpers {
     public struct State {
         private string name;
         private string value;

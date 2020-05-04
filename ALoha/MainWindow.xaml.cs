@@ -14,8 +14,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Drawing;
+using Aloha.Helpers;
+using Aloha.Core;
+using Aloha.Service;
 
-namespace ALoha {
+namespace Aloha {
     public partial class MainWindow : Window {
         private System.Windows.Media.Brush defautlBrush;
 
@@ -35,7 +38,7 @@ namespace ALoha {
         private void Go_Click(object sender, RoutedEventArgs e) {
             try {
                 this.listbox.Items.Clear();
-                Dictionary<Number, State[]> states = new Dictionary<Number, State[]>();
+                Dictionary<Aloha.Helpers.Type, State[]> states = new Dictionary<Aloha.Helpers.Type, State[]>();
                 ValidException validException = new ValidException();
                 SolidColorBrush red = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 0, 0));
 
@@ -91,7 +94,7 @@ namespace ALoha {
 
                 if (Sync.IsChecked == true || Async.IsChecked == true) {
                     if (Async.IsChecked == true) {
-                        states.Add(Number.Async, Aloha(new Asynchronous(
+                        states.Add(global::Aloha.Helpers.Type.Async, Aloha(new Asynchronous(
                             int.Parse(n.Text),
                             int.Parse(r.Text),
                             double.Parse(g.Text),
@@ -99,7 +102,7 @@ namespace ALoha {
                             double.Parse(rg.Text)
                         )));
                     } if (Sync.IsChecked == true) {
-                        states.Add(Number.Sync, Aloha(new Synchronous(
+                        states.Add(global::Aloha.Helpers.Type.Sync, Aloha(new Synchronous(
                             int.Parse(n.Text),
                             int.Parse(r.Text),
                             double.Parse(g.Text),
@@ -111,12 +114,12 @@ namespace ALoha {
                     throw new Exception("Выбирите хотя бы один метод Алоха!");
                 }
 
-                foreach (Number number in states.Keys) {
+                foreach (Aloha.Helpers.Type number in states.Keys) {
                     switch (number) {
-                        case Number.Async:
+                        case global::Aloha.Helpers.Type.Async:
                             this.listbox.Items.Add("------Асинхронная------");
                             break;
-                        case Number.Sync:
+                        case global::Aloha.Helpers.Type.Sync:
                             this.listbox.Items.Add("------Синхронная------");
                             break;
                     }

@@ -1,7 +1,7 @@
-﻿<Application x:Class="ALoha.App"
+﻿<Application x:Class="Aloha.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ALoha"
+             xmlns:local="clr-namespace:Aloha"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

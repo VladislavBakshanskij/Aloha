@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Aloha.Core;
+using Aloha.Helpers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Security;
 using System.Text;
 using System.Windows.Data;
 
-namespace ALoha {
+namespace Aloha {
     public class Synchronous : IAloha {
         private int n;
         private int r;

@@ -1,4 +1,4 @@
-﻿namespace ALoha {
+﻿namespace Aloha {
     partial class AboutAs {
         /// <summary>
         /// Required designer variable.

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.RightsManagement;
 using System.Text;
 
-namespace ALoha {
+namespace Aloha.Helpers {
     public class ValidException : Exception {
         private bool isValid;
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Aloha.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ALoha {
+namespace Aloha {
     public partial class AboutAs : Form {
         private string version = "Версия продукта: ";
         private string year = "Год сборки: ";

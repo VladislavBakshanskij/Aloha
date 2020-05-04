@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Aloha.Core;
+using Aloha.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ALoha {
+namespace Aloha.Service {
     public class Asynchronous : IAloha {
         private int n;
         private int r;
