@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Курсовая работа" Height="524" Width="512">
     <Grid>
-        <Button Name="Go" Content="Go" HorizontalAlignment="Left" VerticalAlignment="Top" Width="227" Margin="10,188,0,0" Height="53" Click="Go_Click" />
+        <Button Name="Go" Content="Go" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="10,188,0,0" Height="53" Click="Go_Click" />
         <GroupBox Header="Входные данные" HorizontalAlignment="Left" Height="173" VerticalAlignment="Top" Width="484" Margin="10,10,0,0" />
         <Label Name="Label1" Content="Временной интервал" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="127,59,0,0" />
         <Label Name="Label2" Content="Нормированная пропускная нагрузка&#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="127,31,0,0" />
@@ -20,8 +20,9 @@
         <ListBox Name="listbox" HorizontalAlignment="Left" Height="237" VerticalAlignment="Top" Width="484" Margin="10,246,0,0" />
         <Label Content="Количество процессоров" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="127,116,0,0" />
         <Label Content="Пропускная нагрузка" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="127,147,0,0" />
-        <Button Content="Об авторе" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Margin="249,188,0,0" Height="53" Click="Button_Click" />
+        <Button Content="Об авторе" HorizontalAlignment="Left" VerticalAlignment="Top" Width="157" Margin="189,188,0,0" Height="53" Click="Button_Click" />
         <CheckBox Name="Async" Content="Асинхронная" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="27,37,0,0" />
         <CheckBox Name="Sync" Content="Синхронная" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="27,65,0,0" />
+        <Button Name="Report" Content="Сводка" HorizontalAlignment="Left" VerticalAlignment="Top" Width="126" Margin="368,188,0,0" Height="53" Click="Report_Click"/>
     </Grid>
 </Window>

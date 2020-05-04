@@ -111,39 +111,41 @@ namespace Aloha.Service {
 
         }
 
-        public State[] State() {
-            int i = 0;
-            int j = 0;
-            Random random = new Random();
+        public State[] State {
+            get {
+                int i = 0;
+                int j = 0;
+                Random random = new Random();
 
-            for (int k = 0; k < l; k++) {
-                double rp = random.NextDouble();
+                for (int k = 0; k < l; k++) {
+                    double rp = random.NextDouble();
 
-                if (rp <= P) {
-                    ++j;
-                } else {
-                    while (true) {
-                        rp = random.NextDouble();
-                        ++i;
+                    if (rp <= P) {
+                        ++j;
+                    } else {
+                        while (true) {
+                            rp = random.NextDouble();
+                            ++i;
 
-                        if (rp <= P) {
-                            ++j;
-                            break;
+                            if (rp <= P) {
+                                ++j;
+                                break;
+                            }
                         }
                     }
                 }
+
+                double exRG = (j + i) * n * l / r / l;
+
+                return new State[] {
+                    new State("Количество успешно пройденных пакетов", j.ToString()),
+                    new State("Количество коллизий", i.ToString()),
+                    new State("Опытное значение нормированной пропускнной нагрузки (RG)", exRG.ToString()),
+                    new State("Опытное значение производительности (S)", (RG * Math.Exp(-2 * RG)).ToString()),
+                    new State("Общее время передачи кадров", ((j + i) * r).ToString()),
+                    new State("Время передачи одного кадра", ((j + i) * r / l).ToString()),
+                };
             }
-
-            double exRG = (j + i) * n * l / r / l;
-
-            return new State[] {
-                new State("Количество успешно пройденных пакетов", j.ToString()),
-                new State("Количество коллизий", i.ToString()),
-                new State("Опытное значение нормированной пропускнной нагрузки (RG)", exRG.ToString()),
-                new State("Опытное значение производительности (S)", (RG * Math.Exp(-2 * RG)).ToString()),
-                new State("Общее время передачи кадров", ((j + i) * r).ToString()),
-                new State("Время передачи одного кадра", ((j + i) * r / l).ToString()),
-            };
         }
     }
 }

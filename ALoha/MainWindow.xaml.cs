@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Aloha.Helpers;
+using Aloha.Core;
+using Aloha.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Deployment.Application;
@@ -14,33 +17,42 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Drawing;
-using Aloha.Helpers;
-using Aloha.Core;
-using Aloha.Service;
 
 namespace Aloha {
     public partial class MainWindow : Window {
         private System.Windows.Media.Brush defautlBrush;
+        private SolidColorBrush red;
+        private Dictionary<Helpers.Type, State[]> states;
 
         public MainWindow() {
             InitializeComponent();
+            Init();
+        }
+
+        private void Init() {
             this.ResizeMode = ResizeMode.NoResize;
             defautlBrush = this.r.Foreground;
             System.Drawing.Icon icon = Properties.Resources.alohaIcon;
             Bitmap bitmap = icon.ToBitmap();
             Icon = bitmap.ToImageSource();
+            red = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 0, 0));
+            states = null;
+            Report.IsEnabled = false;
         }
 
-        private State[] Aloha(IAloha aloha) {
-            return aloha.State();
+        private State[] AlohaState(IAloha aloha) {
+            return aloha.State;
         }
 
         private void Go_Click(object sender, RoutedEventArgs e) {
             try {
+                ValidException validException = new ValidException(true, "Неверные данные");
+                bool isSync = Sync.IsChecked == true;
+                bool isAsync = Async.IsChecked == true;
+
                 this.listbox.Items.Clear();
-                Dictionary<Aloha.Helpers.Type, State[]> states = new Dictionary<Aloha.Helpers.Type, State[]>();
-                ValidException validException = new ValidException();
-                SolidColorBrush red = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 0, 0));
+                states?.Clear();
+                states = states ?? new Dictionary<Helpers.Type, State[]>();
 
                 r.Text = r.Text.Replace(" ", string.Empty).Replace(".", ",");
                 rg.Text = rg.Text.Replace(" ", string.Empty).Replace(".", ",");
@@ -48,6 +60,7 @@ namespace Aloha {
                 l.Text = l.Text.Replace(" ", string.Empty).Replace(".", ",");
                 n.Text = n.Text.Replace(" ", string.Empty).Replace(".", ",");
 
+                #region Validation
                 if (r.Text == string.Empty || 
                     r.Text.Count(symbol => symbol == '.') > 1 ||
                     r.Text.Count(symbol => symbol == ',') > 1
@@ -87,22 +100,23 @@ namespace Aloha {
                     this.g.Foreground = red;
                     validException.IsValid = false;
                 }
+                #endregion
 
                 if (!validException.IsValid) {
                     throw validException;
                 }
 
-                if (Sync.IsChecked == true || Async.IsChecked == true) {
-                    if (Async.IsChecked == true) {
-                        states.Add(global::Aloha.Helpers.Type.Async, Aloha(new Asynchronous(
+                if (isSync || isAsync) {
+                    if (isAsync) {
+                        states.Add(Helpers.Type.Async, AlohaState(new Asynchronous(
                             int.Parse(n.Text),
                             int.Parse(r.Text),
                             double.Parse(g.Text),
                             int.Parse(l.Text), 
                             double.Parse(rg.Text)
                         )));
-                    } if (Sync.IsChecked == true) {
-                        states.Add(global::Aloha.Helpers.Type.Sync, Aloha(new Synchronous(
+                    } if (isSync) {
+                        states.Add(Helpers.Type.Sync, AlohaState(new Synchronous(
                             int.Parse(n.Text),
                             int.Parse(r.Text),
                             double.Parse(g.Text),
@@ -114,12 +128,12 @@ namespace Aloha {
                     throw new Exception("Выбирите хотя бы один метод Алоха!");
                 }
 
-                foreach (Aloha.Helpers.Type number in states.Keys) {
+                foreach (Helpers.Type number in states.Keys) {
                     switch (number) {
-                        case global::Aloha.Helpers.Type.Async:
+                        case Helpers.Type.Async:
                             this.listbox.Items.Add("------Асинхронная------");
                             break;
-                        case global::Aloha.Helpers.Type.Sync:
+                        case Helpers.Type.Sync:
                             this.listbox.Items.Add("------Синхронная------");
                             break;
                     }
@@ -128,8 +142,9 @@ namespace Aloha {
                         this.listbox.Items.Add(state.ToString());
                     }
 
-                    this.listbox.Items.Add("/*********************************************/");
+                    this.listbox.Items.Add("/*******************************************************************/");
                 }
+                Report.IsEnabled = states.Count == 2;
 
                 this.listbox.Items.RemoveAt(listbox.Items.Count - 1);
             } catch (Exception ex) {
@@ -143,6 +158,7 @@ namespace Aloha {
             }
         }
 
+        #region TextBoxs
         private void rg_KeyDown(object sender, KeyEventArgs e) {
             bool isD = e.Key >= Key.D0 && e.Key <= Key.D1;
             bool isNumpad = e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9;
@@ -214,7 +230,14 @@ namespace Aloha {
                 return;
             }
 
-            n.Foreground = defautlBrush;
+            g.Foreground = defautlBrush;
+        }
+        #endregion
+
+        private void Report_Click(object sender, RoutedEventArgs e) {
+            using (ReportForm report = new ReportForm()) {
+                report.ShowDialog();
+            }
         }
     }
 }
