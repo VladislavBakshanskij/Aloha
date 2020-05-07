@@ -7,7 +7,7 @@
 
 **/img/
 *.docx
-
+*.pdf
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

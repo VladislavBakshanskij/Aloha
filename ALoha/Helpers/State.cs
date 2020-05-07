@@ -72,5 +72,14 @@ namespace Aloha.Helpers {
         public override bool Equals(object obj) {
             return value.Equals(obj);
         }
+
+        public override int GetHashCode() {
+            int hashCode = 1753385216;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(name);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(value);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Value);
+            return hashCode;
+        }
     }
 }
