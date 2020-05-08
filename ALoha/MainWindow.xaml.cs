@@ -32,10 +32,10 @@ namespace Aloha {
         private void Init() {
             this.ResizeMode = ResizeMode.NoResize;
             defautlBrush = this.r.Foreground;
-            System.Drawing.Icon icon = Properties.Resources.alohaIcon;
+            Icon icon = Properties.Resources.alohaIcon;
             Bitmap bitmap = icon.ToBitmap();
             Icon = bitmap.ToImageSource();
-            red = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 0, 0));
+            red = System.Windows.Media.Brushes.Red;
             states = null;
             Report.IsEnabled = false;
         }
@@ -225,24 +225,6 @@ namespace Aloha {
                 l.Text = l.Text.Replace(" ", string.Empty).Replace(".", ",");
                 n.Text = n.Text.Replace(" ", string.Empty).Replace(".", ",");
 
-                /* using (GraphicForm graphicForm = new GraphicForm()) {
-                     graphicForm.Alohas = new IAloha[] {
-                         new Asynchronous(
-                             int.Parse(n.Text),
-                             int.Parse(r.Text),
-                             double.Parse(g.Text),
-                             int.Parse(l.Text)
-                         ),
-                         new Synchronous(
-                             int.Parse(n.Text),
-                             int.Parse(r.Text),
-                             double.Parse(g.Text),
-                             int.Parse(l.Text)
-                         ),
-                     };
-
-                     graphicForm.ShowDialog();
-                 }*/
                 GraphicWindow w = new GraphicWindow();
                 w.Alohas = new IAloha[] {
                     new Asynchronous(

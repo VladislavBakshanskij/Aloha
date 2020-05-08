@@ -11,5 +11,9 @@
         <Button Name="CloseButton" Click="CloseButton_Click" Content="Закрыть" HorizontalAlignment="Left" Margin="590,95,0,0" VerticalAlignment="Top" Width="192" Height="42"/>
         <TextBox Name="Dx" Text="0.1" KeyDown="Dx_KeyDown" HorizontalAlignment="Left" Height="23" Margin="656,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="126"/>
         <Label Content="Шаг по x" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="590,10,0,0" Width="61" Height="23"/>
+        <Label Name="x" Content="x" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="590,142,0,0" Width="192" Height="23"/>
+        <Label Name="y" Content="y" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="590,170,0,0" Width="192" Height="27"/>
+        <Label Content="S" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="621,350,0,0" Width="30" Height="23" RenderTransformOrigin="0.9,0.043"/>
+        <Label Content="G" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,30,0,0" Width="30" Height="23"/>
     </Grid>
 </Window>

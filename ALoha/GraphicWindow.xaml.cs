@@ -3,6 +3,7 @@ using Aloha.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.RightsManagement;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,6 +26,7 @@ namespace Aloha {
         private readonly double graphHeight;
         private readonly Brush defautlBrush;
         private readonly SolidColorBrush red;
+        private readonly int countKillChildren;
 
         private double dx;
         private IAloha[] alohas;
@@ -47,19 +49,24 @@ namespace Aloha {
             dx = 0.5;
 
             minX = 0.0;
-            maxX = 4.0;
+            maxX = 4.5;
 
             graphHeight = this.Height - 100;
             graphWidth = this.Width / 2;
 
             cx = 30;
             cy = graphHeight - 5;
-           
+
             distanceX = graphWidth / 3.0;
             distanceY = graphHeight / 1.5;
 
             defautlBrush = Dx.Foreground;
             red = Brushes.Red;
+
+            countKillChildren = grid1.Children.Count;
+           
+            this.x.Content = $"Позиция по x: 0.0";
+            this.y.Content = $"Позиция по y: 0.0";
 
             DrawAxis();
         }
@@ -142,10 +149,10 @@ namespace Aloha {
 
         private void Draw(double dx) {
             try {
-                grid1.Children.RemoveRange(4, grid1.Children.Count - 1);
+                grid1.Children.RemoveRange(countKillChildren, grid1.Children.Count - 1);
                 DrawAxis();
                 Draw(dx, maxX, Brushes.Red, alohas[0].S);
-                Draw(dx, maxX + 0.5, Brushes.Green, alohas[1].S);
+                Draw(dx, maxX, Brushes.Green, alohas[1].S);
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
@@ -182,10 +189,14 @@ namespace Aloha {
                     Y1 = -py * distanceY + cy,
                     X2 = x * distanceX + cx,
                     Y2 = -y * distanceY + cy,
-                    Stroke = stroke
+                    Stroke = stroke,
+                    StrokeThickness = 3  
                 };
 
                 grid1.Children.Add(line);
+
+                if (Round(y, 4) <= 0.0)
+                    return;
                 px = x;
                 py = y;
             }
@@ -213,10 +224,28 @@ namespace Aloha {
         }
 
         private void Window_MouseMove(object sender, MouseEventArgs e) {
-            /*
-             * TODO: 
-             *  Рассчитать движение мыши :D
-             */
+            Point position = e.GetPosition(this);
+
+            if (position.X > cx + graphWidth + 250 || position.Y > cy) {
+                e.Handled = true;
+                return;
+            }
+
+            double x = (position.X - cx) / distanceX;
+            double y = (-position.Y + cy) / distanceY;
+
+            if (x < 0 || y < 0) {
+                e.Handled = true;
+                return;
+            }
+
+            this.x.Content = $"Позиция по x: {Round(x)}";
+            this.y.Content = $"Позиция по y: {Round(y)}";
+        }
+
+        private double Round(double value, int countDigitAfterPoint = 5) {
+            double ten = 10 << countDigitAfterPoint;
+            return ((int)(value * ten)) / ten;
         }
     }
 }
