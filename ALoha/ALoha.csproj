@@ -67,6 +67,10 @@
     <Compile Include="AboutAs.Designer.cs">
       <DependentUpon>AboutAs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\Function.cs" />
+    <Compile Include="GraphicWindow.xaml.cs">
+      <DependentUpon>GraphicWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +84,10 @@
     <Compile Include="Service\Synchronous.cs" />
     <Compile Include="Helpers\Utility.cs" />
     <Compile Include="Helpers\ValidException.cs" />
+    <Page Include="GraphicWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

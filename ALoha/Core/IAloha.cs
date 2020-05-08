@@ -11,6 +11,7 @@ namespace Aloha.Core {
         int N { get; set; }
         double G { get; set; }
         double P { get; }
+        double S(double g);
         State[] State { get; }
     }
 }

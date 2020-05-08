@@ -84,6 +84,21 @@ namespace Aloha.Service {
         }
         #endregion
 
+
+
+        /// <summary>
+        /// Опытное значение производительности
+        /// </summary>
+        /// <param name="g">Нормированная пропуская способность</param>
+        /// <returns>g * Exp(-2 * g)</returns>
+        public double S(double g) {
+            if (g != double.NaN)
+                return g * Math.Exp(-2 * g);
+            else
+                throw new ArgumentException("Пропускная нагрузка не задана!");
+        } 
+
+
         public Asynchronous() 
             : this(1, 5, 2, 10) {
         }
@@ -131,7 +146,7 @@ namespace Aloha.Service {
                     new State("Теоритическое значений производительности", (P * G).ToString()), 
                     new State("Количество коллизий", i.ToString()),
                     new State("Опытное значение нормированной пропускнной нагрузки (RG)", rg.ToString()),
-                    new State("Опытное значение производительности (S)", (rg * Math.Exp(-2 * rg)).ToString()),
+                    new State("Опытное значение производительности (S)", S(g).ToString()),
                     new State("Общее время передачи кадров", ((j + i) * r).ToString()),
                     new State("Время передачи одного кадра", ((j + i) * r / l).ToString()),
                 };

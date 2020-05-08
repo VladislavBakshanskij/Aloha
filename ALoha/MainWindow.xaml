@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Aloha"
         mc:Ignorable="d"
-        Title="Курсовая работа" Height="646.5" Width="512">
+        Title="Курсовая работа" Height="646.5" Width="512" Closed="Window_Closed">
     <Grid>
         <Button Name="Go" Content="Go" HorizontalAlignment="Left" VerticalAlignment="Top" Width="238" Margin="10,182,0,0" Height="80" Click="Go_Click" />
         <GroupBox Header="Входные данные" HorizontalAlignment="Left" Height="146" VerticalAlignment="Top" Width="484" Margin="10,28,0,0" />
@@ -28,7 +28,7 @@
                 <MenuItem Header="Exit" Click="MenuItem_Click"></MenuItem>
             </MenuItem>
             <MenuItem Header="Помощь">
-                <MenuItem Header="Нарисовать график"></MenuItem>
+                <MenuItem Header="Нарисовать график" Name="Graphic" Click="Graphic_Click"></MenuItem>
                 <Separator/>
                 <MenuItem Header="Об авторе" Click="Button_Click"></MenuItem>
             </MenuItem>

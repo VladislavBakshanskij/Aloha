@@ -46,52 +46,21 @@ namespace Aloha {
 
         private void Go_Click(object sender, RoutedEventArgs e) {
             try {
-                ValidException validException = new ValidException(true, "Неверные данные");
-                bool isSync = Sync.IsChecked == true;
+                GC.Collect();
+                states = states ?? new Dictionary<Helpers.Type, State[]>();
+                ValidException validException = CheckValidation();
+                Graphic.IsEnabled = validException.IsValid;
                 bool isAsync = Async.IsChecked == true;
+                bool isSync = Sync.IsChecked == true;
 
                 this.listbox.Items.Clear();
                 states?.Clear();
-                states = states ?? new Dictionary<Helpers.Type, State[]>();
-
+                
                 r.Text = r.Text.Replace(" ", string.Empty).Replace(".", ",");
                 g.Text = g.Text.Replace(" ", string.Empty).Replace(".", ",");
                 l.Text = l.Text.Replace(" ", string.Empty).Replace(".", ",");
                 n.Text = n.Text.Replace(" ", string.Empty).Replace(".", ",");
 
-                #region Validation
-                if (r.Text == string.Empty || 
-                    r.Text.Count(symbol => symbol == '.') > 1 ||
-                    r.Text.Count(symbol => symbol == ',') > 1
-                ) {
-                    this.r.Foreground = red;
-                    validException.IsValid = false;
-                } 
-                
-                if (n.Text == string.Empty || 
-                    n.Text.Count(symbol => symbol == '.') > 1 || 
-                    n.Text.Count(symbol => symbol == ',') > 1
-                ) {
-                    this.n.Foreground = red;
-                    validException.IsValid = false;
-                } 
-                
-                if (l.Text == string.Empty || 
-                    l.Text.Count(symbol => symbol == '.') > 1 ||
-                    l.Text.Count(symbol => symbol == ',') > 1
-                ) {
-                    this.l.Foreground = red;
-                    validException.IsValid = false;
-                } 
-                
-                if (g.Text == string.Empty ||
-                    g.Text.Count(symbol => symbol == '.') > 1 || 
-                    g.Text.Count(symbol => symbol == ',') > 1
-                ) {
-                    this.g.Foreground = red;
-                    validException.IsValid = false;
-                }
-                #endregion
 
                 if (!validException.IsValid) {
                     throw validException;
@@ -136,9 +105,32 @@ namespace Aloha {
 
                 Report.IsEnabled = states.Count == 2;
                 this.listbox.Items.RemoveAt(listbox.Items.Count - 1);
+                GC.Collect();
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private bool IsValid(TextBox textBox) {
+            if (textBox.Text == string.Empty ||
+                textBox.Text.Count(symbol => symbol == '.') > 1 ||
+                textBox.Text.Count(symbol => symbol == ',') > 1
+            ) {
+                textBox.Foreground = red;
+                return false;
+            }
+            return true;
+        }
+
+        private ValidException CheckValidation() {
+            ValidException validException = new ValidException(true, "Неверные данные");
+
+            validException.IsValid = IsValid(r);
+            validException.IsValid = IsValid(n);
+            validException.IsValid = IsValid(l);
+            validException.IsValid = IsValid(g);
+
+            return validException;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
@@ -209,6 +201,7 @@ namespace Aloha {
 
         private void Report_Click(object sender, RoutedEventArgs e) {
             using (ReportForm report = new ReportForm()) {
+                GC.Collect();
                 ReportForm.States = states;
                 report.ShowDialog();
             }
@@ -216,6 +209,65 @@ namespace Aloha {
 
         private void MenuItem_Click(object sender, RoutedEventArgs e) {
             this.Close();
+        }
+
+        private void Graphic_Click(object sender, RoutedEventArgs e) {
+            try {
+                GC.Collect();
+                ValidException validException = CheckValidation();
+                
+                if (!validException.IsValid) {
+                    throw validException;
+                }
+
+                r.Text = r.Text.Replace(" ", string.Empty).Replace(".", ",");
+                g.Text = g.Text.Replace(" ", string.Empty).Replace(".", ",");
+                l.Text = l.Text.Replace(" ", string.Empty).Replace(".", ",");
+                n.Text = n.Text.Replace(" ", string.Empty).Replace(".", ",");
+
+                /* using (GraphicForm graphicForm = new GraphicForm()) {
+                     graphicForm.Alohas = new IAloha[] {
+                         new Asynchronous(
+                             int.Parse(n.Text),
+                             int.Parse(r.Text),
+                             double.Parse(g.Text),
+                             int.Parse(l.Text)
+                         ),
+                         new Synchronous(
+                             int.Parse(n.Text),
+                             int.Parse(r.Text),
+                             double.Parse(g.Text),
+                             int.Parse(l.Text)
+                         ),
+                     };
+
+                     graphicForm.ShowDialog();
+                 }*/
+                GraphicWindow w = new GraphicWindow();
+                w.Alohas = new IAloha[] {
+                    new Asynchronous(
+                        int.Parse(n.Text),
+                        int.Parse(r.Text),
+                        double.Parse(g.Text),
+                        int.Parse(l.Text)
+                    ),
+                    new Synchronous(
+                        int.Parse(n.Text),
+                        int.Parse(r.Text),
+                        double.Parse(g.Text),
+                        int.Parse(l.Text)
+                    ),
+                };
+                w.ShowDialog();
+                
+                GC.Collect();
+            } catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void Window_Closed(object sender, EventArgs e) {
+            GC.Collect();
         }
     }
 }
