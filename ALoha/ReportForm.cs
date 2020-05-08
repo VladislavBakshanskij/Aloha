@@ -51,8 +51,8 @@ namespace Aloha {
             id++;
 
             diff.Add(new State(
-                $"Число коллизий меньше у {AsyncOrSyncAsc(states[Helpers.Type.Async][id], states[Helpers.Type.Sync][id])}",
-                states[Helpers.Type.Async][id] > states[Helpers.Type.Sync][id] ? states[Helpers.Type.Sync][id].Value : states[Helpers.Type.Async][id].Value
+                $"Число коллизий меньше у {AsyncOrSyncDesc(states[Helpers.Type.Async][id], states[Helpers.Type.Sync][id])}",
+                states[Helpers.Type.Async][id] < states[Helpers.Type.Sync][id] ? states[Helpers.Type.Sync][id].Value : states[Helpers.Type.Async][id].Value
             ));
             id++;
 
@@ -70,20 +70,20 @@ namespace Aloha {
             
             diff.Add(new State(
                 $"Общее время передачи кадров меньше у {AsyncOrSyncDesc(states[Helpers.Type.Async][id], states[Helpers.Type.Sync][id])}",
-                states[Helpers.Type.Async][id] < states[Helpers.Type.Sync][id] ? states[Helpers.Type.Async][id].Value : states[Helpers.Type.Sync][id].Value
+                states[Helpers.Type.Async][id] < states[Helpers.Type.Sync][id] ? states[Helpers.Type.Sync][id].Value : states[Helpers.Type.Async][id].Value
             ));
             id++;
 
             diff.Add(new State(
                 $"Время передачи одного кадра меньше у {AsyncOrSyncDesc(states[Helpers.Type.Async][id], states[Helpers.Type.Sync][id])}",
-                states[Helpers.Type.Async][id] < states[Helpers.Type.Sync][id] ? states[Helpers.Type.Async][id].Value : states[Helpers.Type.Sync][id].Value
+                states[Helpers.Type.Async][id] < states[Helpers.Type.Sync][id] ? states[Helpers.Type.Sync][id].Value : states[Helpers.Type.Async][id].Value
             ));
 
             report.Items.AddRange(diff.ToArray());
         }
 
         private string AsyncOrSyncAsc(State async, State sync) => async > sync ? "Асинхронной" : "Синхронной";
-        private string AsyncOrSyncDesc(State async, State sync) => async < sync ? "Асинхронной" : "Синхронной";
+        private string AsyncOrSyncDesc(State async, State sync) => async < sync ? "Синхронной" : "Асинхронной";
 
         private void FillListBox(ListBox listBox, State[] states) {
             foreach (State state in states) {

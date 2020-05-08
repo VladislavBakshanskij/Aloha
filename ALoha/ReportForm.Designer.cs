@@ -34,7 +34,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(12, 479);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(470, 35);
+            this.button1.Size = new System.Drawing.Size(560, 35);
             this.button1.TabIndex = 0;
             this.button1.Text = "Закрыть";
             this.button1.UseVisualStyleBackColor = true;
@@ -45,7 +45,7 @@
             this.async.FormattingEnabled = true;
             this.async.Location = new System.Drawing.Point(12, 12);
             this.async.Name = "async";
-            this.async.Size = new System.Drawing.Size(470, 147);
+            this.async.Size = new System.Drawing.Size(560, 147);
             this.async.TabIndex = 1;
             // 
             // sync
@@ -53,7 +53,7 @@
             this.sync.FormattingEnabled = true;
             this.sync.Location = new System.Drawing.Point(12, 168);
             this.sync.Name = "sync";
-            this.sync.Size = new System.Drawing.Size(470, 147);
+            this.sync.Size = new System.Drawing.Size(560, 147);
             this.sync.TabIndex = 2;
             // 
             // report
@@ -61,14 +61,14 @@
             this.report.FormattingEnabled = true;
             this.report.Location = new System.Drawing.Point(12, 321);
             this.report.Name = "report";
-            this.report.Size = new System.Drawing.Size(470, 147);
+            this.report.Size = new System.Drawing.Size(560, 147);
             this.report.TabIndex = 3;
             // 
             // ReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(496, 526);
+            this.ClientSize = new System.Drawing.Size(584, 526);
             this.Controls.Add(this.report);
             this.Controls.Add(this.sync);
             this.Controls.Add(this.async);

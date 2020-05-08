@@ -29,6 +29,8 @@ namespace Aloha {
         private readonly int countKillChildren;
 
         private double dx;
+        private bool isSync;
+        private bool isAsync;
         private IAloha[] alohas;
 
         public IAloha[] Alohas {
@@ -130,10 +132,10 @@ namespace Aloha {
         private void Draw_Click(object sender, RoutedEventArgs e) {
             try {
                 ValidException validException = CheckValidation();
-            /*
-             * bool isAsync = Async.IsChecked == true;
-             * bool isSync = Sync.IsChecked == true;
-             */
+                
+                isAsync = async.IsChecked == true;
+                isSync = sync.IsChecked == true;
+                
                 Dx.Text = Dx.Text.Replace(" ", string.Empty).Replace(".", ",");
 
                 if (!validException.IsValid) {
@@ -151,8 +153,15 @@ namespace Aloha {
             try {
                 grid1.Children.RemoveRange(countKillChildren, grid1.Children.Count - 1);
                 DrawAxis();
-                Draw(dx, maxX, Brushes.Red, alohas[0].S);
-                Draw(dx, maxX, Brushes.Green, alohas[1].S);
+
+                if (isSync || isAsync) { 
+                    if (isAsync) 
+                        Draw(dx, maxX, Brushes.Red, alohas[0].S);
+                    if (isSync) 
+                        Draw(dx, maxX, Brushes.Green, alohas[1].S);
+                } else {
+                    throw new Exception("Выбирите метод для графика!");
+                }
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
