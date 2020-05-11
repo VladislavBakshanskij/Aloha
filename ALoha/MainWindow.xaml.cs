@@ -61,6 +61,7 @@ namespace Aloha {
                 l.Text = l.Text.Replace(" ", string.Empty).Replace(".", ",");
                 n.Text = n.Text.Replace(" ", string.Empty).Replace(".", ",");
 
+                this.listbox.Items.Add("Aloha считает...");
 
                 if (!validException.IsValid) {
                     throw validException;
@@ -85,6 +86,8 @@ namespace Aloha {
                 } else {
                     throw new Exception("Выбирите хотя бы один метод Алоха!");
                 }
+
+                this.listbox.Items.Clear();
 
                 foreach (Helpers.Type number in states.Keys) {
                     switch (number) {
