@@ -146,7 +146,7 @@ namespace Aloha.Service {
                     new State("Теоритическое значений производительности", (P * G).ToString()), 
                     new State("Количество коллизий", i.ToString()),
                     new State("Опытное значение нормированной пропускнной нагрузки (RG)", rg.ToString()),
-                    new State("Опытное значение производительности (S)", S(g).ToString()),
+                    new State("Опытное значение производительности (S)", (rg * Math.Exp(-2 * rg)).ToString()),
                     new State("Общее время передачи кадров", ((j + i) * r).ToString()),
                     new State("Время передачи одного кадра", ((j + i) * r / l).ToString()),
                 };
